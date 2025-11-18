@@ -41,7 +41,7 @@ export default function Header({
                   : "text-gray-700 hover:text-orange-500"
               }`}
             >
-              Home
+              Accueil
             </button>
             <button
               onClick={() => onNavigate("menu")}
@@ -61,11 +61,15 @@ export default function Header({
                   : "text-gray-700 hover:text-orange-500"
               }`}
             >
-              Drinks
+              Boissons
             </button>
             <button
               onClick={() => onNavigate("reservation")}
-              className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors"
+              className={`"text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors ${
+                currentPage === "reservation"
+                  ? "text-orange-500"
+                  : "text-gray-700 hover:text-orange-500"
+              }`}
             >
               Reservation
             </button>
@@ -73,7 +77,7 @@ export default function Header({
               Contact
             </button>
             <button className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors">
-              About Us
+              A propos
             </button>
           </nav>
 
@@ -96,7 +100,7 @@ export default function Header({
               <Heart className="w-5 h-5 text-gray-700" />
             </button>
             <button className="hidden sm:block px-4 sm:px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium text-sm">
-              Log In
+              Se connecter
             </button>
             <button
               className="md:hidden p-2"
@@ -117,7 +121,7 @@ export default function Header({
                 }}
                 className="text-left text-sm font-medium text-gray-700 hover:text-orange-500"
               >
-                Home
+                Accueil
               </button>
               <button
                 onClick={() => {
@@ -135,7 +139,7 @@ export default function Header({
                 }}
                 className="text-left text-sm font-medium text-gray-700 hover:text-orange-500"
               >
-                Drinks
+                Boissons
               </button>
               <button className="text-left text-sm font-medium text-gray-700 hover:text-orange-500">
                 Reservation
@@ -144,10 +148,10 @@ export default function Header({
                 Contact
               </button>
               <button className="text-left text-sm font-medium text-gray-700 hover:text-orange-500">
-                About Us
+                A propos
               </button>
               <button className="px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors font-medium text-sm text-center">
-                Log In
+                Se connecter
               </button>
             </nav>
           </div>

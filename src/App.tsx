@@ -7,6 +7,7 @@ import DishDetailPage from "./components/DishDetailPage";
 import CartPage from "./components/CartPage";
 import { Dish } from "./data/staticData";
 import ReservationPage from "./components/ReservationPage";
+import Footer from "./components/Footer";
 
 interface CartItem extends Dish {
   quantity: number;
@@ -87,6 +88,8 @@ function App() {
           onRemoveItem={handleRemoveItem}
         />
       )}
+
+      <Footer />
     </div>
   );
 }
