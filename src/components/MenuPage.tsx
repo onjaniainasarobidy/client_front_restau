@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { Search, Star, Flame, Clock, ChevronLeft, ChevronRight, Utensils, Coffee, Pizza, Salad, Sparkles, ChefHat, Heart } from 'lucide-react';
+import { Search, Star,AlertCircle,  Shield, Flame, Clock, ChevronLeft, ChevronRight, Utensils, Coffee, Pizza, Salad, Sparkles, ChefHat, Heart } from 'lucide-react';
 import { dishes as allDishes, categories as allCategories, Dish, Category } from '../data/staticData';
+  
 
 interface MenuPageProps {
   onNavigate: (page: string, dishId?: string) => void;
@@ -25,6 +26,33 @@ export default function MenuPage({ onNavigate, onAddToCart }: MenuPageProps) {
   const loading = false;
   const carouselRef = useRef<HTMLDivElement>(null);
 
+  // Mapping des icônes d'allergènes
+const allergenIcons: { [key: string]: string } = {
+  'gluten': '🌾',
+  'lactose': '🥛',
+  'nuts': '🥜',
+  'fish': '🐟',
+  'eggs': '🥚',
+  'soja': '🫘',
+  'shellfish': '🦐',
+  'celery': '🥬',
+  'mustard': '🟡',
+  'sesame': '⚫',
+};
+
+// Noms complets des allergènes
+const allergenNames: { [key: string]: string } = {
+  'gluten': 'Gluten',
+  'lactose': 'Lactose',
+  'nuts': 'Fruits à coque',
+  'fish': 'Poisson',
+  'eggs': 'Œufs',
+  'soja': 'Soja',
+  'shellfish': 'Crustacés',
+  'celery': 'Céleri',
+  'mustard': 'Moutarde',
+  'sesame': 'Sésame',
+};
   // Catégories premium pour le carousel
   const carouselCategories = [
     { 
@@ -404,53 +432,112 @@ export default function MenuPage({ onNavigate, onAddToCart }: MenuPageProps) {
             <p className="mt-4 text-gray-600">Chargement des plats...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredDishes.map((dish) => (
-              <div
-                key={dish.id}
-                className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer group"
-              >
-                <div className="relative">
-                  <img
-                    src={dish.image_url}
-                    alt={dish.name}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    onClick={() => onNavigate('detail', dish.id)}
-                  />
-                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 shadow-lg">
-                    <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-                    <span className="text-sm font-semibold">{dish.rating}</span>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+  {filteredDishes.map((dish) => (
+    <div
+      key={dish.id}
+      className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer group"
+    >
+      <div className="relative">
+        <img
+          src={dish.image_url}
+          alt={dish.name}
+          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+          onClick={() => onNavigate('detail', dish.id)}
+        />
+        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1 shadow-lg">
+          <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
+          <span className="text-sm font-semibold">{dish.rating}</span>
+        </div>
+        
+        {/* Badge d'allergènes */}
+        {dish.allergens && dish.allergens.length > 0 && (
+          <div className="absolute top-4 left-4">
+            <div className="relative group/allergen">
+              <div className="bg-amber-500 text-white rounded-full p-2 shadow-lg hover:bg-amber-600 transition-colors">
+                <Shield className="w-4 h-4" />
+              </div>
+              
+              {/* Tooltip des allergènes */}
+              <div className="absolute left-0 top-full mt-2 hidden group-hover/allergen:block z-10">
+                <div className="bg-white rounded-2xl p-4 shadow-2xl border border-amber-200 min-w-48">
+                  <div className="flex items-center gap-2 mb-3">
+                    <AlertCircle className="w-4 h-4 text-amber-600" />
+                    <span className="font-semibold text-gray-900 text-sm">Allergènes</span>
                   </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="font-bold text-xl text-gray-900 mb-3 line-clamp-1">{dish.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">{dish.description}</p>
-
-                  <div className="flex items-center justify-between mb-5 text-sm text-gray-500">
-                    <span className="flex items-center gap-2">
-                      <Flame className="w-4 h-4 text-orange-500" />
-                      {dish.calories} Cal
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      {dish.prep_time} min
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-orange-500">${dish.price.toFixed(2)}</span>
-                    <button
-                      onClick={() => onAddToCart(dish)}
-                      className="px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all font-semibold text-sm hover:shadow-lg transform hover:scale-105"
-                    >
-                      Commander
-                    </button>
+                  <div className="space-y-2">
+                    {dish.allergens.map((allergen, index) => (
+                      <div key={index} className="flex items-center gap-3 text-sm">
+                        <span className="text-gray-700">{allergenNames[allergen] || allergen}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
+        )}
+      </div>
+
+      <div className="p-6">
+        <h3 className="font-bold text-xl text-gray-900 mb-3 line-clamp-1">{dish.name}</h3>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">{dish.description}</p>
+
+        <div className="flex items-center justify-between mb-5 text-sm text-gray-500">
+          {/* Allergènes visibles */}
+          <div className="flex-1">
+            {dish.allergens && dish.allergens.length > 0 ? (
+              <div className="space-y-2">
+                <div className="flex items-center gap-1 text-amber-600 font-medium">
+                  <Shield className="w-3 h-3" />
+                  <span className="text-xs">Contient:</span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {dish.allergens.slice(0, 2).map((allergen, index) => (
+                    <span 
+                      key={index}
+                      className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-medium"
+                    >
+                      {allergenNames[allergen] || allergen}
+                    </span>
+                  ))}
+                  {dish.allergens.length > 2 && (
+                    <span 
+                      className="text-xs text-amber-600 bg-amber-50 rounded-full px-2 py-1 border border-amber-200"
+                      title={dish.allergens.slice(2).map(a => allergenNames[a] || a).join(', ')}
+                    >
+                      +{dish.allergens.length - 2}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <span className="flex items-center gap-2 text-green-600 font-medium text-xs">
+                <Shield className="w-3 h-3" />
+                Sans allergènes
+              </span>
+            )}
+          </div>
+          
+          <span className="flex items-center gap-2 shrink-0">
+            <Clock className="w-4 h-4 text-orange-500" />
+            {dish.prep_time} min
+          </span>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-bold text-orange-500">${dish.price.toFixed(2)}</span>
+          <button
+            onClick={() => onAddToCart(dish)}
+            className="px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-all font-semibold text-sm hover:shadow-lg transform hover:scale-105"
+          >
+            Commander
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
         )}
 
         {!loading && filteredDishes.length === 0 && (

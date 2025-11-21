@@ -17,6 +17,7 @@ export interface Dish {
   calories: number;
   prep_time: number;
   is_popular: boolean;
+   allergens: string[]; 
 }
 
 export interface Ingredient {
@@ -52,6 +53,7 @@ export const dishes: Dish[] = [
     calories: 440,
     prep_time: 20,
     is_popular: true,
+    allergens: ['gluten', 'lactose'],
   },
   {
     id: '2',
@@ -65,6 +67,7 @@ export const dishes: Dish[] = [
     calories: 520,
     prep_time: 15,
     is_popular: true,
+    allergens: ['gluten', 'lactose'],
   },
   {
     id: '3',
@@ -78,6 +81,7 @@ export const dishes: Dish[] = [
     calories: 280,
     prep_time: 12,
     is_popular: true,
+    allergens: ['eggs'],
   },
   {
     id: '4',
@@ -91,6 +95,7 @@ export const dishes: Dish[] = [
     calories: 320,
     prep_time: 18,
     is_popular: true,
+    allergens: ['fish', 'nuts'],
   },
   {
     id: '5',
@@ -104,6 +109,7 @@ export const dishes: Dish[] = [
     calories: 450,
     prep_time: 15,
     is_popular: false,
+    allergens: ['gluten', 'soja'],
   },
   {
     id: '6',
@@ -117,6 +123,7 @@ export const dishes: Dish[] = [
     calories: 380,
     prep_time: 15,
     is_popular: false,
+    allergens: ['gluten'],
   },
   {
     id: '7',
@@ -130,6 +137,7 @@ export const dishes: Dish[] = [
     calories: 420,
     prep_time: 18,
     is_popular: false,
+    allergens: ['gluten'],
   },
   {
     id: '8',
@@ -143,6 +151,7 @@ export const dishes: Dish[] = [
     calories: 480,
     prep_time: 25,
     is_popular: false,
+    allergens: [],
   },
   {
     id: '9',
@@ -156,8 +165,9 @@ export const dishes: Dish[] = [
     calories: 580,
     prep_time: 30,
     is_popular: false,
+    allergens: [],
   },
-  {
+  { 
     id: '10',
     name: 'California Roll',
     description: 'Fresh sushi roll with crab, avocado, and cucumber',
@@ -169,7 +179,9 @@ export const dishes: Dish[] = [
     calories: 290,
     prep_time: 15,
     is_popular: false,
+    allergens: ['fish', 'gluten'],
   },
+  
   {
     id: '11',
     name: 'Mojito',
@@ -182,6 +194,7 @@ export const dishes: Dish[] = [
     calories: 150,
     prep_time: 5,
     is_popular: false,
+    allergens: ['alcohol'],
   },
   {
     id: '12',
@@ -195,6 +208,7 @@ export const dishes: Dish[] = [
     calories: 220,
     prep_time: 5,
     is_popular: false,
+    allergens: ['alcohol'],
   },
   {
     id: '13',
@@ -208,6 +222,7 @@ export const dishes: Dish[] = [
     calories: 125,
     prep_time: 2,
     is_popular: false,
+    allergens: ['alcohol'],
   },
   {
     id: '14',
@@ -221,6 +236,7 @@ export const dishes: Dish[] = [
     calories: 180,
     prep_time: 2,
     is_popular: false,
+    allergens: ['gluten'],
   },
 ];
 
