@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #f97316;
-  --color-primary-hover: #ea580c;
-  --color-secondary: #fb923c;
-  --color-accent: #fbbf24;
-  --color-accent-hover: #f59e0b;
+  --color-primary: #152b47;
+  --color-primary-hover: #0d1b2f;
+  --color-secondary: #152b47;
+  --color-accent: #152b47;
+  --color-accent-hover: #0d1b2f;
   --color-success: #10b981;
   --color-success-hover: #059669;
 }

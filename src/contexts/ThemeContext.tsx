@@ -17,11 +17,11 @@ interface ThemeContextType {
 }
 
 const defaultColors: ThemeColors = {
-  primary: '#f97316',
-  primaryHover: '#ea580c',
-  secondary: '#fb923c',
-  accent: '#fbbf24',
-  accentHover: '#f59e0b',
+  primary: '#152b47',
+  primaryHover: '#0d1b2f',
+  secondary: '#152b47',
+  accent: '#152b47',
+  accentHover: '#0d1b2f',
   success: '#10b981',
   successHover: '#059669',
 };
