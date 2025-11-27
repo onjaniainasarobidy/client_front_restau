@@ -8,6 +8,7 @@ import CartPage from "./components/CartPage";
 import { Dish } from "./data/staticData";
 import ReservationPage from "./components/ReservationPage";
 import Footer from "./components/Footer";
+import ThemeCustomizer from "./components/ThemeCustomizer";
 
 interface CartItem extends Dish {
   quantity: number;
@@ -90,6 +91,7 @@ function App() {
       )}
 
       <Footer />
+      <ThemeCustomizer />
     </div>
   );
 }
